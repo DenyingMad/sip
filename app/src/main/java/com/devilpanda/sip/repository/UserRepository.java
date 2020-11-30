@@ -44,6 +44,27 @@ public class UserRepository {
         return data;
     }
 
+    public void updateUser(User user) {
+        Log.d(TAG, "updateUser: " + user);
+        updateUserTask updateUserTask = new updateUserTask(userDao);
+        updateUserTask.execute(user);
+    }
+
+    private static class updateUserTask extends AsyncTask<User, Void, Void> {
+
+        private final UserDao userDao;
+
+        public updateUserTask(UserDao userDao) {
+            this.userDao = userDao;
+        }
+
+        @Override
+        protected Void doInBackground(User... users) {
+            userDao.update(users[0]);
+            return null;
+        }
+    }
+
     private static class getUserTask extends AsyncTask<Void, Void, User> {
 
         private final UserDao userDao;
@@ -64,6 +85,8 @@ public class UserRepository {
         @Override
         protected void onPostExecute(User user) {
             Log.d(TAG, "getUser onPostExecute: " + user);
+            User u = User.getInstance();
+            u = user;
             data.postValue(user);
         }
     }

@@ -7,7 +7,6 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
@@ -22,7 +21,7 @@ import android.widget.Spinner;
 
 import com.devilpanda.sip.R;
 import com.devilpanda.sip.model.User;
-import com.devilpanda.sip.viewmodel.HomeViewModel;
+import com.devilpanda.sip.viewmodel.UserViewModel;
 
 public class ThirdSettingFragment extends Fragment {
 
@@ -33,7 +32,7 @@ public class ThirdSettingFragment extends Fragment {
     private int spinnerPosition;
     private NavController navController;
 
-    private HomeViewModel viewModel;
+    private UserViewModel viewModel;
 
     public ThirdSettingFragment() {
         // Required empty public constructor
@@ -41,7 +40,7 @@ public class ThirdSettingFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        viewModel = new ViewModelProvider(requireActivity()).get(HomeViewModel.class);
+        viewModel = new ViewModelProvider(requireActivity()).get(UserViewModel.class);
         viewModel.init();
     }
 

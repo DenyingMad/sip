@@ -9,7 +9,7 @@ import androidx.lifecycle.ViewModel;
 import com.devilpanda.sip.model.User;
 import com.devilpanda.sip.repository.UserRepository;
 
-public class HomeViewModel extends ViewModel {
+public class UserViewModel extends ViewModel {
 
     private static final String TAG = "HomeViewModel";
 
@@ -22,23 +22,21 @@ public class HomeViewModel extends ViewModel {
         }
     }
 
-
-    // todo rewrite to update db
-    public LiveData<User> updateUser() {
-        Log.d(TAG, "updateUser: get user instance and recalculate params");
-        User user = User.getInstance();
-        Log.d(TAG, "updateUser: " + user);
-        if (user.getWaterTotal() != null) {
-            Log.d(TAG, "updateUser: computing");
-            user.countDailyWaterAmount();
-            user.countWaterLeft();
-        }
-        userLiveData.setValue(user);
-        Log.d(TAG, "updateUser: " + userLiveData.getValue());
-        return userLiveData;
+    public void addDrankWater(Integer amount) {
+        User user = userLiveData.getValue();
+        user.addDrankWater(amount);
+        updateUser(user);
     }
 
+    public void removeDrankWater(Integer amount) {
+        User user = userLiveData.getValue();
+        user.removeDrankWater(amount);
+        updateUser(user);
+    }
 
+    public void updateUser(User user) {
+        userRepository.updateUser(user);
+    }
 
     public void createUser(User user) {
         Log.d(TAG, "createUser: insert user");

@@ -13,6 +13,9 @@
         <action
             android:id="@+id/action_homeFragment_to_startFragment"
             app:destination="@id/startFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_addRemoveFragment"
+            app:destination="@id/addRemoveFragment" />
     </fragment>
     <fragment
         android:id="@+id/settingsFragment"
@@ -60,5 +63,18 @@
         <action
             android:id="@+id/action_startFragment_to_firstSettingFragment"
             app:destination="@id/firstSettingFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/addRemoveFragment"
+        android:name="com.devilpanda.sip.view.AddRemoveFragment"
+        android:label="fragment_add_remove"
+        tools:layout="@layout/fragment_add_remove" >
+        <argument
+            android:name="add_or_remove"
+            app:argType="boolean"
+            android:defaultValue="true" />
+        <action
+            android:id="@+id/action_addRemoveFragment_to_homeFragment"
+            app:destination="@id/homeFragment" />
     </fragment>
 </navigation>

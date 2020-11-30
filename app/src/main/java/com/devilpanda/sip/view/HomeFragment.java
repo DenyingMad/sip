@@ -21,13 +21,13 @@ import android.widget.TextView;
 
 import com.devilpanda.sip.R;
 import com.devilpanda.sip.model.User;
-import com.devilpanda.sip.viewmodel.HomeViewModel;
+import com.devilpanda.sip.viewmodel.UserViewModel;
 
 public class HomeFragment extends Fragment {
 
     private static final String TAG = "HomeFragment";
 
-    private HomeViewModel viewModel;
+    private UserViewModel viewModel;
     private NavController navController;
 
     private Button remove, add;
@@ -43,7 +43,7 @@ public class HomeFragment extends Fragment {
 
         Log.d(TAG, "onCreate: viewmodel init");
 
-        viewModel = new ViewModelProvider(requireActivity()).get(HomeViewModel.class);
+        viewModel = new ViewModelProvider(requireActivity()).get(UserViewModel.class);
         viewModel.init();
     }
 
@@ -64,21 +64,26 @@ public class HomeFragment extends Fragment {
         initViews(view);
 
         checkFirstLaunch();
-    }
 
-    @Override
-    public void onStart() {
-        super.onStart();
-        Log.d(TAG, "onStart: observing viewmodel");
+        View.OnClickListener listener = new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                int viewId = v.getId();
+                Bundle arg = new Bundle();
+                if (viewId == R.id.home_add_btn) {
+                    arg.putBoolean("Change", true);
+                }
+                else if (viewId == R.id.home_remove_btn) {
+                    arg.putBoolean("Change", false);
+                }
+                Navigation.findNavController(view)
+                        .navigate(R.id.action_homeFragment_to_addRemoveFragment, arg);
 
-//        viewModel.updateUser().observe(this.requireActivity(), new Observer<User>() {
-//            @Override
-//            public void onChanged(User user) {
-//                Log.d(TAG, "onChanged: " +
-//                        user);
-//                setupViews(user);
-//            }
-//        });
+            }
+        };
+
+        add.setOnClickListener(listener);
+        remove.setOnClickListener(listener);
 
     }
 
@@ -111,7 +116,7 @@ public class HomeFragment extends Fragment {
      * <p>
      * Если в SharedPreferences лежит значение "Not First",
      * то запускается фрагмент {@link HomeFragment}, используются настройки, полученные при
-     * первом запуске.
+     * первом запуске, из базы данных загружаются поля пользователя.
      */
     private void checkFirstLaunch() {
         Log.d(TAG, "checkFirstLaunch: checking");

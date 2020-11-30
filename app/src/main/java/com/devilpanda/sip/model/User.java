@@ -81,6 +81,16 @@ public class User {
         countWaterLeft();
     }
 
+    public void removeDrankWater(int ml) {
+        if (waterDrankToday - ml >= 0) {
+            this.waterDrankToday -= ml;
+            countWaterLeft();
+        } else {
+            this.waterDrankToday = 0;
+            countWaterLeft();
+        }
+    }
+
     public void countWaterLeft() {
         this.waterLeft = waterTotal - waterDrankToday;
         this.percent = (double) (waterDrankToday * 100.0d / waterTotal);
