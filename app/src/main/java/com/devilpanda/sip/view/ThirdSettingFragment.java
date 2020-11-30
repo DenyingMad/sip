@@ -53,8 +53,8 @@ public class ThirdSettingFragment extends Fragment {
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        spinner = view.findViewById(R.id.physics_setting_spinner);
-        next = view.findViewById(R.id.physics_setting_next_btn);
+        spinner = view.findViewById(R.id.settings_activity_spinner);
+        next = view.findViewById(R.id.settings_next_btn);
 
         navController = Navigation.findNavController(view);
 

@@ -33,8 +33,15 @@ public class HistoryRecyclerViewAdapter extends RecyclerView.Adapter<HistoryRecy
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        holder.action.setText(userHistoryList.get(position).getAction());
-        holder.amount.setText(String.valueOf(userHistoryList.get(position).getAmount()));
+        String a = userHistoryList.get(position).getAction();
+        String act = "";
+        if (a.equals("add")) {
+            act = "Выпил";
+        } else if (a.equals("remove")) {
+            act = "Убрал";
+        }
+        holder.action.setText(act);
+        holder.amount.setText(String.valueOf(userHistoryList.get(position).getAmount()) + " мл");
         holder.time.setText(userHistoryList.get(position).getTime());
     }
 

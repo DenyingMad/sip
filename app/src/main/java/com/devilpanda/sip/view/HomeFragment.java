@@ -150,10 +150,12 @@ public class HomeFragment extends Fragment {
                     user.countWaterLeft();
                     setupViews(user);
                     double p = user.getPercent();
-                    if (p < 20) {
+                    if (p < 20 && p != 0) {
                         image.setImageDrawable(getResources().getDrawable(R.drawable.angry_men));
                     } else if (p >= 20 && p < 50) {
                         image.setImageDrawable(getResources().getDrawable(R.drawable.sad_men));
+                    } else if (p == 0) {
+                        image.setImageDrawable(getResources().getDrawable(R.drawable.ok_man));
                     } else {
                         image.setImageDrawable(getResources().getDrawable(R.drawable.happy_men));
                     }

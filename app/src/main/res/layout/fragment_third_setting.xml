@@ -19,7 +19,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <Spinner
-        android:id="@+id/physics_setting_spinner"
+        android:id="@+id/settings_activity_spinner"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:entries="@array/physical_activities"
@@ -31,7 +31,7 @@
         app:layout_constraintTop_toBottomOf="@+id/textView3" />
 
     <Button
-        android:id="@+id/physics_setting_next_btn"
+        android:id="@+id/settings_next_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/next"
@@ -39,6 +39,6 @@
         android:layout_marginTop="20dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/physics_setting_spinner" />
+        app:layout_constraintTop_toBottomOf="@+id/settings_activity_spinner" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

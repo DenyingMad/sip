@@ -11,6 +11,7 @@
     <string name="enter_weight_hint_error">Неверный формат ввода</string>
     <string name="remove">Убрать</string>
     <string name="add">Добавить</string>
+    <string name="your_progress">Вы выпили сегодня</string>
 
     <string-array name="physical_activities">
         <item>Низкая (0 – 1 ч)</item>
