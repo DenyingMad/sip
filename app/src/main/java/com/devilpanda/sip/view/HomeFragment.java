@@ -17,11 +17,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.devilpanda.sip.R;
 import com.devilpanda.sip.model.User;
 import com.devilpanda.sip.viewmodel.UserViewModel;
+
+import java.util.Locale;
 
 public class HomeFragment extends Fragment {
 
@@ -32,6 +35,7 @@ public class HomeFragment extends Fragment {
 
     private Button remove, add;
     private TextView drankWater, target, left, percent;
+    private ProgressBar progressBar;
 
     public HomeFragment() {
         // Required empty public constructor
@@ -97,13 +101,20 @@ public class HomeFragment extends Fragment {
         // Buttons
         remove = view.findViewById(R.id.home_remove_btn);
         add = view.findViewById(R.id.home_add_btn);
+        // Other
+        progressBar = view.findViewById(R.id.home_circle_progress);
     }
 
     private void setupViews(User user) {
-        drankWater.setText(String.valueOf(user.getWaterDrankToday()));
-        target.setText(String.valueOf(user.getWaterTotal()));
-        left.setText(String.valueOf(user.getWaterLeft()));
-        percent.setText(String.valueOf(user.getPercent()));
+        String drankWaterString = String.valueOf(user.getWaterDrankToday()) + " мл";
+        drankWater.setText(drankWaterString);
+        String targetString = String.valueOf(user.getWaterTotal()) + " мл";
+        target.setText(targetString);
+        String leftString = String.valueOf(user.getWaterLeft()) + " мл";
+        left.setText(leftString);
+        String percentString = String.format(Locale.ENGLISH,"%.1f", user.getPercent()) + " %";
+        percent.setText(percentString);
+        progressBar.setProgress((int) Math.round(user.getPercent()));
     }
 
     /**

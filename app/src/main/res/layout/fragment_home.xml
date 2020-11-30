@@ -6,15 +6,31 @@
     android:layout_height="match_parent"
     tools:context=".view.HomeFragment">
 
+    <ProgressBar
+        android:id="@+id/home_circle_progress"
+        android:layout_width="250dp"
+        android:layout_height="250dp"
+
+        android:indeterminateOnly="false"
+        android:progressDrawable="@drawable/circle"
+        android:progress="60"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.495"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.125" />
+
     <TextView
         android:id="@+id/home_textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Home"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:text="Your progress"
+        app:layout_constraintBottom_toTopOf="@id/info_layout"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@id/home_circle_progress"
+        app:layout_constraintVertical_bias="0.075" />
 
     <TextView
         android:id="@+id/home_drank_water"
@@ -22,68 +38,116 @@
         android:layout_height="wrap_content"
 
         android:text="2450 ml"
+        android:textSize="26sp"
 
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/home_textView"/>
+        app:layout_constraintTop_toBottomOf="@id/home_textView" />
 
     <LinearLayout
         android:id="@+id/buttons_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:gravity="center"
         android:orientation="horizontal"
+        app:layout_constraintBottom_toTopOf="@+id/info_layout"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/home_drank_water"
-        android:gravity="center">
+        app:layout_constraintTop_toBottomOf="@+id/home_drank_water">
 
         <Button
             android:id="@+id/home_remove_btn"
             android:layout_width="125dp"
             android:layout_height="wrap_content"
-            android:text="Убрать"
-            android:layout_margin="10dp"/>
+            android:layout_margin="10dp"
+            android:background="@color/red"
+            android:text="@string/remove" />
 
         <Button
             android:id="@+id/home_add_btn"
             android:layout_width="125dp"
             android:layout_height="wrap_content"
-            android:text="Добавить"
-            android:layout_margin="10dp"/>
+            android:layout_margin="10dp"
+            android:background="@color/green"
+            android:text="@string/add" />
     </LinearLayout>
 
     <LinearLayout
         android:id="@+id/info_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:gravity="center"
         android:orientation="horizontal"
+        android:paddingVertical="20dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/buttons_layout"
-        android:gravity="center">
+        app:layout_constraintStart_toStartOf="parent">
 
-        <TextView
-            android:id="@+id/home_target_water"
+
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Цель 8000 мл"
-            android:layout_margin="20dp"/>
+            android:gravity="center"
+            android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/home_left_water"
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Цель:"
+                android:textSize="18sp" />
+
+            <TextView
+                android:id="@+id/home_target_water"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="20dp"
+                android:text="8000 мл"
+                android:textSize="22sp" />
+        </LinearLayout>
+
+        <View
+            android:id="@+id/divider"
+            android:layout_width="1dp"
+            android:layout_height="match_parent"
+            android:background="?android:attr/listDivider" />
+
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Осталось 3000 мл"
-            android:layout_margin="20dp"/>
+            android:gravity="center"
+            android:orientation="vertical">
 
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Осталось:"
+                android:textSize="18sp" />
+
+            <TextView
+                android:id="@+id/home_left_water"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="20dp"
+                android:text="3000 мл"
+                android:textSize="22sp" />
+        </LinearLayout>
+        <View
+            android:id="@+id/divider2"
+            android:layout_width="1dp"
+            android:layout_height="match_parent"
+            android:background="?android:attr/listDivider" />
         <TextView
             android:id="@+id/home_percent"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginHorizontal="20dp"
             android:text="30%"
-            android:layout_margin="20dp"/>
+            android:textSize="22sp" />
 
 
     </LinearLayout>
+
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

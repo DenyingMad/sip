@@ -9,6 +9,8 @@
     <string name="StartingRecommendation">Пить воду в течение дня необходимо, особенно важно соблюдать норму.</string>
     <string name="enter_weight_hint">Вес в кг</string>
     <string name="enter_weight_hint_error">Неверный формат ввода</string>
+    <string name="remove">Убрать</string>
+    <string name="add">Добавить</string>
 
     <string-array name="physical_activities">
         <item>Низкая (0 – 1 ч)</item>
