@@ -7,7 +7,13 @@ import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 import com.devilpanda.sip.model.User;
+import com.devilpanda.sip.model.UserHistory;
 import com.devilpanda.sip.repository.UserRepository;
+
+import java.text.DateFormat;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.List;
 
 public class UserViewModel extends ViewModel {
 
@@ -15,6 +21,7 @@ public class UserViewModel extends ViewModel {
 
     private UserRepository userRepository;
     private MutableLiveData<User> userLiveData;
+    private MutableLiveData<List<UserHistory>> userHistoryLiveData;
 
     public void init() {
         if (userRepository == null) {
@@ -22,16 +29,36 @@ public class UserViewModel extends ViewModel {
         }
     }
 
+    public LiveData<List<UserHistory>> getHistory() {
+        userHistoryLiveData = userRepository.getAllUserHistory();
+        return userHistoryLiveData;
+    }
+
+    public void insertHistory(UserHistory userHistory) {
+        userRepository.insertHistory(userHistory);
+    }
+
     public void addDrankWater(Integer amount) {
         User user = userLiveData.getValue();
         user.addDrankWater(amount);
         updateUser(user);
+        // add to history
+        addToHistory(amount, "add");
+    }
+
+    private void addToHistory(Integer amount, String action) {
+        Date currentTime = Calendar.getInstance().getTime();
+        String time = currentTime.getHours() + ":" + currentTime.getMinutes();
+        UserHistory userHistory = new UserHistory(action, time, amount);
+        insertHistory(userHistory);
     }
 
     public void removeDrankWater(Integer amount) {
         User user = userLiveData.getValue();
         user.removeDrankWater(amount);
         updateUser(user);
+
+        addToHistory(amount, "remove");
     }
 
     public void updateUser(User user) {

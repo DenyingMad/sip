@@ -9,14 +9,18 @@ public class UserHistory {
 
     @PrimaryKey(autoGenerate = true)
     private long id;
-    @ColumnInfo(name = "date")
-    private String date;
+    @ColumnInfo(name = "action")
+    private String action;
+    @ColumnInfo(name = "time")
+    private String time;
     @ColumnInfo(name = "amount")
     private Integer amount;
-    @ColumnInfo(name = "total")
-    private Integer total;
-    @ColumnInfo(name = "percent")
-    private Double percent;
+
+    public UserHistory(String action, String time, Integer amount) {
+        this.action = action;
+        this.time = time;
+        this.amount = amount;
+    }
 
     public long getId() {
         return id;
@@ -26,12 +30,12 @@ public class UserHistory {
         this.id = id;
     }
 
-    public String getDate() {
-        return date;
+    public String getTime() {
+        return time;
     }
 
-    public void setDate(String date) {
-        this.date = date;
+    public void setTime(String time) {
+        this.time = time;
     }
 
     public Integer getAmount() {
@@ -42,19 +46,11 @@ public class UserHistory {
         this.amount = amount;
     }
 
-    public Integer getTotal() {
-        return total;
+    public String getAction() {
+        return action;
     }
 
-    public void setTotal(Integer total) {
-        this.total = total;
-    }
-
-    public Double getPercent() {
-        return percent;
-    }
-
-    public void setPercent(Double percent) {
-        this.percent = percent;
+    public void setAction(String action) {
+        this.action = action;
     }
 }

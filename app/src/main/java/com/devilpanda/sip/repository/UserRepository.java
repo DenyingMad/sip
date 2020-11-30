@@ -6,8 +6,10 @@ import android.util.Log;
 import androidx.lifecycle.MutableLiveData;
 
 import com.devilpanda.sip.database.AppDatabase;
+import com.devilpanda.sip.database.HistoryDao;
 import com.devilpanda.sip.database.UserDao;
 import com.devilpanda.sip.model.User;
+import com.devilpanda.sip.model.UserHistory;
 import com.devilpanda.sip.view.MainActivity;
 
 import java.util.List;
@@ -20,6 +22,7 @@ public class UserRepository {
 
     AppDatabase db = MainActivity.getInstance().getDatabase();
     UserDao userDao = db.userDao();
+    HistoryDao historyDao = db.historyDao();
 
     private UserRepository() {
     }
@@ -29,6 +32,56 @@ public class UserRepository {
             instance = new UserRepository();
         }
         return instance;
+    }
+
+    public MutableLiveData<List<UserHistory>> getAllUserHistory() {
+        MutableLiveData<List<UserHistory>> data = new MutableLiveData<>();
+
+        getAllHistoryTask getHistoryTask = new getAllHistoryTask(historyDao, data);
+        getHistoryTask.execute();
+
+        return data;
+    }
+
+    private static class getAllHistoryTask extends AsyncTask<Void, Void, List<UserHistory>> {
+
+        private HistoryDao historyDao;
+        private MutableLiveData<List<UserHistory>> data;
+
+        public getAllHistoryTask(HistoryDao historyDao, MutableLiveData<List<UserHistory>> data) {
+            this.historyDao = historyDao;
+            this.data = data;
+        }
+
+        @Override
+        protected List<UserHistory> doInBackground(Void... voids) {
+            return historyDao.getAllHistory();
+        }
+
+        @Override
+        protected void onPostExecute(List<UserHistory> userHistoryList) {
+            data.postValue(userHistoryList);
+        }
+    }
+
+    public void insertHistory(UserHistory history) {
+        insertHistoryTask insertTask = new insertHistoryTask(historyDao);
+        insertTask.execute(history);
+    }
+
+    private static class insertHistoryTask extends AsyncTask<UserHistory, Void, Void> {
+
+        private final HistoryDao historyDao;
+
+        public insertHistoryTask(HistoryDao historyDao) {
+            this.historyDao = historyDao;
+        }
+
+        @Override
+        protected Void doInBackground(UserHistory... userHistories) {
+            historyDao.insert(userHistories[0]);
+            return null;
+        }
     }
 
     public void insertUser(User user) {
