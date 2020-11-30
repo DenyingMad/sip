@@ -18,25 +18,39 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.4" />
 
-    <EditText
-        android:id="@+id/weight_setting_edit_text"
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/weight_input_layout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:ems="10"
-        android:inputType="numberSigned"
+
         android:layout_marginTop="30dp"
+
+        android:gravity="center"
+        app:errorEnabled="true"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/weight_setting_tv" />
+        app:layout_constraintTop_toBottomOf="@+id/weight_setting_tv"
+        style="@style/Widget.MaterialComponents.TextInputEditText.OutlinedBox">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/weight_setting_edit_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:ems="10"
+            android:gravity="center"
+            android:inputType="numberSigned"
+            android:textSize="22sp" />
+    </com.google.android.material.textfield.TextInputLayout>
 
     <Button
         android:id="@+id/weight_setting_next_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Продолжить"
+        android:text="@string/next"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/weight_setting_edit_text" />
+        app:layout_constraintTop_toBottomOf="@+id/weight_input_layout" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

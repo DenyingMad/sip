@@ -4,6 +4,7 @@ import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
+import androidx.room.TypeConverter;
 
 import java.util.List;
 
@@ -16,7 +17,7 @@ public class User {
 
     @PrimaryKey(autoGenerate = true)
     private long id;
-    @Ignore
+
     private Gender gender;
     @ColumnInfo(name = "weight")
     private Integer weight;
@@ -26,9 +27,9 @@ public class User {
     @ColumnInfo(name = "water_drank_today")
     private Integer waterDrankToday = 0;
     @ColumnInfo(name = "water_total")
-    private Integer waterTotal;
+    private Integer waterTotal = 0;
 
-    private Integer waterLeft;
+    private Integer waterLeft = 0;
     private Double percent = 0.0;
 
     public User(){}

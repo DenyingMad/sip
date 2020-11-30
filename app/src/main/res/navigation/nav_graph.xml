@@ -3,13 +3,17 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/first_launch_settings">
+    app:startDestination="@id/homeFragment">
 
     <fragment
         android:id="@+id/homeFragment"
         android:name="com.devilpanda.sip.view.HomeFragment"
         android:label="fragment_home"
-        tools:layout="@layout/fragment_home" />
+        tools:layout="@layout/fragment_home" >
+        <action
+            android:id="@+id/action_homeFragment_to_startFragment"
+            app:destination="@id/startFragment" />
+    </fragment>
     <fragment
         android:id="@+id/settingsFragment"
         android:name="com.devilpanda.sip.view.SettingsFragment"
@@ -20,43 +24,41 @@
         android:name="com.devilpanda.sip.view.HistoryFragment"
         android:label="fragment_history"
         tools:layout="@layout/fragment_history" />
-    <navigation android:id="@+id/first_launch_settings"
-        app:startDestination="@id/startFragment">
-        <fragment
-            android:id="@+id/firstSettingFragment"
-            android:name="com.devilpanda.sip.view.FirstSettingFragment"
-            android:label="fragment_first_setiing"
-            tools:layout="@layout/fragment_first_setting">
-            <action
-                android:id="@+id/action_firstSetiingFragment_to_secondSettingFragment"
-                app:destination="@id/secondSettingFragment" />
-        </fragment>
-        <fragment
-            android:id="@+id/thirdSettingFragment"
-            android:name="com.devilpanda.sip.view.ThirdSettingFragment"
-            android:label="fragment_third_setting"
-            tools:layout="@layout/fragment_third_setting">
-            <action
-                android:id="@+id/action_thirdSettingFragment_to_homeFragment"
-                app:destination="@id/homeFragment" />
-        </fragment>
-        <fragment
-            android:id="@+id/secondSettingFragment"
-            android:name="com.devilpanda.sip.view.SecondSettingFragment"
-            android:label="fragment_second_setting"
-            tools:layout="@layout/fragment_second_setting">
-            <action
-                android:id="@+id/action_secondSettingFragment_to_thirdSettingFragment"
-                app:destination="@id/thirdSettingFragment" />
-        </fragment>
-        <fragment
-            android:id="@+id/startFragment"
-            android:name="com.devilpanda.sip.view.StartFragment"
-            android:label="fragment_start"
-            tools:layout="@layout/fragment_start">
-            <action
-                android:id="@+id/action_startFragment_to_firstSetiingFragment"
-                app:destination="@id/firstSettingFragment" />
-        </fragment>
-    </navigation>
+    <fragment
+        android:id="@+id/thirdSettingFragment"
+        android:name="com.devilpanda.sip.view.ThirdSettingFragment"
+        android:label="fragment_third_setting"
+        tools:layout="@layout/fragment_third_setting" >
+        <action
+            android:id="@+id/action_thirdSettingFragment_to_homeFragment"
+            app:destination="@id/homeFragment"
+            app:popUpTo="@id/homeFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/firstSettingFragment"
+        android:name="com.devilpanda.sip.view.FirstSettingFragment"
+        android:label="fragment_first_setting"
+        tools:layout="@layout/fragment_first_setting" >
+        <action
+            android:id="@+id/action_firstSettingFragment_to_secondSettingFragment"
+            app:destination="@id/secondSettingFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/secondSettingFragment"
+        android:name="com.devilpanda.sip.view.SecondSettingFragment"
+        android:label="fragment_second_setting"
+        tools:layout="@layout/fragment_second_setting" >
+        <action
+            android:id="@+id/action_secondSettingFragment_to_thirdSettingFragment"
+            app:destination="@id/thirdSettingFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/startFragment"
+        android:name="com.devilpanda.sip.view.StartFragment"
+        android:label="fragment_start"
+        tools:layout="@layout/fragment_start" >
+        <action
+            android:id="@+id/action_startFragment_to_firstSettingFragment"
+            app:destination="@id/firstSettingFragment" />
+    </fragment>
 </navigation>

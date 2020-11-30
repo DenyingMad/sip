@@ -6,14 +6,12 @@
     android:layout_height="match_parent"
     tools:context=".view.StartFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-
     <TextView
         android:id="@+id/textView"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:text="Пить воду в течение дня необходимо, особенно важно соблюдать норму."
+        android:text="@string/StartingRecommendation"
         android:textSize="22sp"
         app:layout_constraintBottom_toTopOf="@+id/start_settings_next_btn"
         app:layout_constraintEnd_toEndOf="parent"
@@ -27,7 +25,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true"
-        android:text="Let's start!"
+        android:text="@string/let_s_start"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

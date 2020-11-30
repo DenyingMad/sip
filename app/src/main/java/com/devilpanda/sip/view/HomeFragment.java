@@ -125,6 +125,8 @@ public class HomeFragment extends Fragment {
             viewModel.getUser().observe(requireActivity(), new Observer<User>() {
                 @Override
                 public void onChanged(User user) {
+                    user.countDailyWaterAmount();
+                    user.countWaterLeft();
                     setupViews(user);
                 }
             });

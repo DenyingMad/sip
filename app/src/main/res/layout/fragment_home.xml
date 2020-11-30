@@ -1,14 +1,89 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".view.HomeFragment">
 
-    <!-- TODO: Update blank fragment layout -->
     <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="Home" />
+        android:id="@+id/home_textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Home"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
-</FrameLayout>
+    <TextView
+        android:id="@+id/home_drank_water"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:text="2450 ml"
+
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/home_textView"/>
+
+    <LinearLayout
+        android:id="@+id/buttons_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/home_drank_water"
+        android:gravity="center">
+
+        <Button
+            android:id="@+id/home_remove_btn"
+            android:layout_width="125dp"
+            android:layout_height="wrap_content"
+            android:text="Убрать"
+            android:layout_margin="10dp"/>
+
+        <Button
+            android:id="@+id/home_add_btn"
+            android:layout_width="125dp"
+            android:layout_height="wrap_content"
+            android:text="Добавить"
+            android:layout_margin="10dp"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/info_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/buttons_layout"
+        android:gravity="center">
+
+        <TextView
+            android:id="@+id/home_target_water"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Цель 8000 мл"
+            android:layout_margin="20dp"/>
+
+        <TextView
+            android:id="@+id/home_left_water"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Осталось 3000 мл"
+            android:layout_margin="20dp"/>
+
+        <TextView
+            android:id="@+id/home_percent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="30%"
+            android:layout_margin="20dp"/>
+
+
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
