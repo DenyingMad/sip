@@ -1,34 +1,64 @@
 package com.devilpanda.sip.view;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.NavigationUI;
+import androidx.room.Room;
 
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 
 import com.devilpanda.sip.R;
+import com.devilpanda.sip.database.AppDatabase;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class MainActivity extends AppCompatActivity {
 
+    private static final String TAG = "MainActivity";
+
     private NavController navController;
     private BottomNavigationView bottomNavigationView;
+
+    public static MainActivity instance;
+    private AppDatabase database;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        Log.d(TAG, "onCreate: database build");
+
+
+        instance = this;
+        if (database == null) {
+            database = Room.databaseBuilder(this, AppDatabase.class, "database")
+                    .build();
+            Log.d(TAG, "onCreate: built");
+        }
+
+
         bottomNavigationView = findViewById(R.id.bottomNavigationView);
 
         setUpNavController();
-        checkFirstLaunch();
+    }
+
+    public static MainActivity getInstance() {
+        return instance;
+    }
+
+    public AppDatabase getDatabase() {
+        return database;
     }
 
     void setUpNavController() {
+
+        Log.d(TAG, "setUpNavController: navigation setup");
+
         navController = Navigation.findNavController(this, R.id.main_nav_host_fragment);
         NavigationUI.setupWithNavController(bottomNavigationView, navController);
 
@@ -42,24 +72,5 @@ public class MainActivity extends AppCompatActivity {
                 bottomNavigationView.setVisibility(View.VISIBLE);
             }
         });
-    }
-
-    /**
-     * Функция проверяет, запущено ли приложение впервые
-     * Если в SharedPreferences лежит значение "First",
-     * то запускается фрагмент {@link StartFragment}, который начинает цепочку фрагментов для ввода
-     * настроек пользователя.
-     * {@link ThirdSettingFragment} записывает в SharedPreferences значение "Not First"
-     *
-     * Если в SharedPreferences лежит значение "Not First",
-     * то запускается фрагмент {@link HomeFragment}, используются настройки, полученные при
-     * первом запуске.
-     */
-    void checkFirstLaunch() {
-        SharedPreferences sharedPreferences = getPreferences(MODE_PRIVATE);
-        String isFirstLaunch = sharedPreferences.getString("Not First", "First");
-        if (isFirstLaunch.equals("Not First")) {
-            navController.navigate(R.id.action_thirdSettingFragment_to_homeFragment);
-        }
     }
 }

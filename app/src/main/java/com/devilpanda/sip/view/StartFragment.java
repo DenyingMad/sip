@@ -1,5 +1,7 @@
 package com.devilpanda.sip.view;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -8,6 +10,7 @@ import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,10 +20,15 @@ import com.devilpanda.sip.R;
 
 public class StartFragment extends Fragment {
 
+    private static final String TAG = "StartFragment";
+
+    private NavController navController;
+
     public StartFragment() {
         // Required empty public constructor
     }
-@Override
+
+    @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
     }
@@ -34,8 +42,11 @@ public class StartFragment extends Fragment {
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        NavController navController = Navigation.findNavController(view);
+        navController = Navigation.findNavController(view);
         Button nextBtn = view.findViewById(R.id.start_settings_next_btn);
-        nextBtn.setOnClickListener(view1 -> navController.navigate(R.id.action_startFragment_to_firstSetiingFragment));
+        Log.d(TAG, "onViewCreated: waiting for navigate");
+        nextBtn.setOnClickListener(view1 -> navController.navigate(R.id.action_startFragment_to_firstSettingFragment));
     }
+
+
 }
