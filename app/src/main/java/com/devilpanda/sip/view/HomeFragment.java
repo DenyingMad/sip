@@ -2,10 +2,12 @@ package com.devilpanda.sip.view;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.content.res.Resources;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.content.res.ResourcesCompat;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
@@ -17,6 +19,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
@@ -36,6 +39,7 @@ public class HomeFragment extends Fragment {
     private Button remove, add;
     private TextView drankWater, target, left, percent;
     private ProgressBar progressBar;
+    private ImageView image;
 
     public HomeFragment() {
         // Required empty public constructor
@@ -103,6 +107,7 @@ public class HomeFragment extends Fragment {
         add = view.findViewById(R.id.home_add_btn);
         // Other
         progressBar = view.findViewById(R.id.home_circle_progress);
+        image = view.findViewById(R.id.home_image);
     }
 
     private void setupViews(User user) {
@@ -144,6 +149,14 @@ public class HomeFragment extends Fragment {
                     user.countDailyWaterAmount();
                     user.countWaterLeft();
                     setupViews(user);
+                    double p = user.getPercent();
+                    if (p < 20) {
+                        image.setImageDrawable(getResources().getDrawable(R.drawable.angry_men));
+                    } else if (p >= 20 && p < 50) {
+                        image.setImageDrawable(getResources().getDrawable(R.drawable.sad_men));
+                    } else {
+                        image.setImageDrawable(getResources().getDrawable(R.drawable.happy_men));
+                    }
                 }
             });
         }

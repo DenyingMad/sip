@@ -48,7 +48,11 @@ public class UserViewModel extends ViewModel {
 
     private void addToHistory(Integer amount, String action) {
         Date currentTime = Calendar.getInstance().getTime();
-        String time = currentTime.getHours() + ":" + currentTime.getMinutes();
+        String hours = currentTime.getHours() > 9
+                ? String.valueOf(currentTime.getHours()) : "0" + currentTime.getHours();
+        String minutes = currentTime.getMinutes() > 9
+                ? String.valueOf(currentTime.getMinutes()) : "0" + currentTime.getMinutes();
+        String time = hours + ":" + minutes;
         UserHistory userHistory = new UserHistory(action, time, amount);
         insertHistory(userHistory);
     }
